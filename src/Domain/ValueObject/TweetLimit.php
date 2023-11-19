@@ -21,6 +21,16 @@ class TweetLimit
 
     private function validateLimit(int $limit): void
     {
+        if (!is_numeric($limit)) {
+            throw new \InvalidArgumentException('Invalid TweetLimit value');
+        }
+
+        $limit = (int)$limit;
+
+        if ($limit < 0) {
+            throw new \InvalidArgumentException('Tweet limit must be greather than 0');
+        }
+
         if ($limit > self::MAX_LIMIT) {
             throw new \InvalidArgumentException('Tweet limit cannot exceed ' . self::MAX_LIMIT);
         }
