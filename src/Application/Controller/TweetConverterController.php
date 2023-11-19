@@ -2,10 +2,12 @@
 
 namespace App\Application\Controller;
 
+use App\Domain\ValueObject\TweetLimit;
 use App\Infrastructure\TweetRepositoryInMemory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 final class TweetConverterController extends AbstractController
@@ -21,7 +23,13 @@ final class TweetConverterController extends AbstractController
      */
     public function index(TweetRepositoryInMemory $repo, Request $request, $userName)
     {
-        $tweets = $repo->searchByUserName($userName, 10);
+        try {
+            $limit = $this->getTweetLimitFromRequest($request);
+        } catch (\InvalidArgumentException $exception) {
+            return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
+
+        $tweets = $repo->searchByUserName($userName, $limit);
 
         $tweetsResponse = [];
         foreach($tweets as $tweet){
@@ -30,5 +38,12 @@ final class TweetConverterController extends AbstractController
         }
 
         return new JsonResponse($tweetsResponse);
+    }
+
+    private function getTweetLimitFromRequest(Request $request): TweetLimit
+    {
+        $limit = $request->query->getInt('limit');
+
+        return new TweetLimit($limit);
     }
 }
