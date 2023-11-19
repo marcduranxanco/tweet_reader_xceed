@@ -21,6 +21,14 @@ final class TweetConverterController extends AbstractController
      */
     public function index(TweetRepositoryInMemory $repo, Request $request, $userName)
     {
-        return new JsonResponse([]);
+        $tweets = $repo->searchByUserName($userName, 10);
+
+        $tweetsResponse = [];
+        foreach($tweets as $tweet){
+            $tweetText = strtoupper($tweet->getText());
+            array_push($tweetsResponse, $tweetText);
+        }
+
+        return new JsonResponse($tweetsResponse);
     }
 }
