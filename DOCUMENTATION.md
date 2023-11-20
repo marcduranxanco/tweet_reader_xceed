@@ -25,5 +25,5 @@ Sets the foundation for future enhancements.
 ## Add TweetLimit value object and its test
 
 - [Add the TweetLimit VO](https://github.com/marcduranxanco/tweet_reader_xceed/commit/f07d03b0047fe9834e7271daa740e0f37a7800d7): Instead of using int for the `searchByUserName` query, now `TweetLimit` value object is used for better control over that value
-- [Test TweetLimit VO validating multiple cases](https://github.com/marcduranxanco/tweet_reader_xceed/commit/cde489a45240c3415f0a27ec60540131719dbaa8) 
-- [Minor refactor after type testing](https://github.com/marcduranxanco/tweet_reader_xceed/commit/d7c41536643f1ff74270ef19959f7b797e8d629f)
+- [Test TweetLimit VO validating multiple cases](https://github.com/marcduranxanco/tweet_reader_xceed/commit/cde489a45240c3415f0a27ec60540131719dbaa8): Tests added for `TweetLimit` added
+- Refactor after type testing: [d7c4153](https://github.com/marcduranxanco/tweet_reader_xceed/commit/d7c41536643f1ff74270ef19959f7b797e8d629f) and [cf58130](https://github.com/marcduranxanco/tweet_reader_xceed/commit/cf58130aa5798f851a2a027c0837c97872cde8f1)
