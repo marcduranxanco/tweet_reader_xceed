@@ -2,8 +2,8 @@
 
 namespace App\Application\Controller;
 
+use App\Domain\Service\TweetService;
 use App\Domain\ValueObject\TweetLimit;
-use App\Infrastructure\TweetRepositoryInMemory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,16 +12,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class TweetConverterController extends AbstractController
 {
+    private TweetService $tweetService;
+
+    public function __construct(TweetService $tweetService)
+    {
+        $this->tweetService = $tweetService;
+    }
+
     /**
      * @Route("/tweets/{userName}", methods={"GET"})
      *
-     * @param TweetRepositoryInMemory $repo
      * @param Request                 $request
      * @param                         $userName
      *
      * @return JsonResponse
      */
-    public function index(TweetRepositoryInMemory $repo, Request $request, $userName)
+    public function index(Request $request, $userName)
     {
         try {
             $limit = $this->getTweetLimitFromRequest($request);
@@ -29,15 +35,9 @@ final class TweetConverterController extends AbstractController
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
-        $tweets = $repo->searchByUserName($userName, $limit);
+        $tweets = $this->tweetService->getTweetsByUserName($userName, $limit);
 
-        $tweetsResponse = [];
-        foreach($tweets as $tweet){
-            $tweetText = strtoupper($tweet->getText());
-            array_push($tweetsResponse, $tweetText);
-        }
-
-        return new JsonResponse($tweetsResponse);
+        return new JsonResponse($tweets);
     }
 
     private function getTweetLimitFromRequest(Request $request): TweetLimit
