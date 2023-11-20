@@ -42,7 +42,11 @@ final class TweetConverterController extends AbstractController
 
     private function getTweetLimitFromRequest(Request $request): TweetLimit
     {
-        $limit = $request->query->getInt('limit');
+        $limit = $request->query->get('limit');
+
+        if (!is_numeric($limit)) {
+            throw new \InvalidArgumentException('Invalid argument limit provided.', Response::HTTP_BAD_REQUEST);
+        }
 
         return new TweetLimit($limit);
     }

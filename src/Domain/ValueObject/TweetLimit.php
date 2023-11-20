@@ -27,7 +27,7 @@ class TweetLimit
 
         $limit = (int)$limit;
 
-        if ($limit < 0) {
+        if ($limit <= 0) {
             throw new \InvalidArgumentException('Tweet limit must be greather than 0');
         }
 
