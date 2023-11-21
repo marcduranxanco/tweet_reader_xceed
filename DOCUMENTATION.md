@@ -15,7 +15,7 @@ Commits could contain more extended information about the changes.
 - Return tweets uppercase
 - Create cache layer
 - ✅ Limit the count less than 10 (Value Object instead of int)
-- Test
+- ✅ Test
 
 ## Initial Implementation
 Sets the foundation for future enhancements. Implemented basic functionality in `TweetConverterController` to return tweets in uppercase.  
@@ -34,6 +34,9 @@ Adds tests for the newly introduced TweetLimit value object and the there are so
 ## Moving the logic to the app Domain
 The `TweetService` is introduced in the domain, extracting business logic from the controller and enhancing reusability.
 The decision is made to remove `'../src/Domain/'` from the exclude list to enable autowiring for domain elements.
+Added tests for `TweetConverterController` and refactor to move the code to green.
 
 - [TweetService added and refactor service configuration](https://github.com/marcduranxanco/tweet_reader_xceed/commit/09ac9cadaddd06cd2d81cd2531a32826d127a294)
 - [Refactor TweetConverterController to use TweetService](https://github.com/marcduranxanco/tweet_reader_xceed/commit/7fdea7682a09790ef90cb2ac381645587cd932d2)
+- [Add tests for TweetConverterController](https://github.com/marcduranxanco/tweet_reader_xceed/commit/96c8526ca4fee97f31adc31dec9e9dce79e20069)
+- [Refactor code across multiple classes to pass newly added unit tests](https://github.com/marcduranxanco/tweet_reader_xceed/commit/0c8145f685c0a3eb8f82bbc051020f488e84b850)
