@@ -20,10 +20,20 @@ class TweetService
 
         $tweetsResponse = [];
         foreach ($tweets as $tweet) {
-            $tweetText = strtoupper($tweet->getText());
-            array_push($tweetsResponse, $tweetText);
+            array_push($tweetsResponse, $tweet->getText());
         }
 
         return $tweetsResponse;
+    }
+
+    public function searchByUserNameUpperCase(string $username, TweetLimit $limit): array
+    {
+        $tweets = $this->getTweetsByUserName($username, $limit);
+
+        foreach ($tweets as $key => $tweet) {
+            $tweets[$key] = strtoupper($tweet);
+        }
+
+        return $tweets;
     }
 }

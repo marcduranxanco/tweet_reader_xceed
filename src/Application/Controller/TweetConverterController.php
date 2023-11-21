@@ -35,7 +35,7 @@ final class TweetConverterController extends AbstractController
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
-        $tweets = $this->tweetService->getTweetsByUserName($userName, $limit);
+        $tweets = $this->tweetService->searchByUserNameUpperCase($userName, $limit);
 
         return new JsonResponse($tweets);
     }
