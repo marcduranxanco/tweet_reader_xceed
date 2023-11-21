@@ -12,10 +12,10 @@ Commits could contain more extended information about the changes.
 - `composer start`: start the app
 
 ### Todo list
-- Return tweets uppercase
-- Create cache layer
 - ✅ Limit the count less than 10 (Value Object instead of int)
+- ✅ Return tweets uppercase
 - ✅ Test
+- Create cache layer
 
 ## Initial Implementation
 Sets the foundation for future enhancements. Implemented basic functionality in `TweetConverterController` to return tweets in uppercase.  
