@@ -15,7 +15,7 @@ Commits could contain more extended information about the changes.
 - ✅ Limit the count less than 10 (Value Object instead of int)
 - ✅ Return tweets uppercase
 - ✅ Test
-- Create cache layer
+- ✅ Create cache layer
 
 ## Initial Implementation
 Sets the foundation for future enhancements. Implemented basic functionality in `TweetConverterController` to return tweets in uppercase.  
@@ -39,4 +39,11 @@ Added tests for `TweetConverterController` and refactor to move the code to gree
 - [TweetService added and refactor service configuration](https://github.com/marcduranxanco/tweet_reader_xceed/commit/09ac9cadaddd06cd2d81cd2531a32826d127a294)
 - [Refactor TweetConverterController to use TweetService](https://github.com/marcduranxanco/tweet_reader_xceed/commit/7fdea7682a09790ef90cb2ac381645587cd932d2)
 - [Add tests for TweetConverterController](https://github.com/marcduranxanco/tweet_reader_xceed/commit/96c8526ca4fee97f31adc31dec9e9dce79e20069)
-- [Refactor code across multiple classes to pass newly added unit tests](https://github.com/marcduranxanco/tweet_reader_xceed/commit/0c8145f685c0a3eb8f82bbc051020f488e84b850)
+- [Refactor code across multiple classes to pass newly added unit tests](✅https://github.com/marcduranxanco/tweet_reader_xceed/commit/0c8145f685c0a3eb8f82bbc051020f488e84b850)
+
+## Add cache layer
+Cache layer has been added to `TweetConverterController` instead of the service, as it has been considered that other systems (e.g., console) might not want to add a cache.
+However, cache logic could be directly added to `TweetService` to address this situation.
+
+- [Add cache dependencies to the project](https://github.com/marcduranxanco/tweet_reader_xceed/commit/c3a077f4ecc834d67c0b8edd5cbfabece15dae3c)
+- [Cache layer added to TweetConverterController index action](https://github.com/marcduranxanco/tweet_reader_xceed/commit/0f77526eae5e1bc3e0718770ba3747549b5d5247)
