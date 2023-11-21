@@ -48,6 +48,10 @@ final class TweetConverterController extends AbstractController
             throw new \InvalidArgumentException('Invalid argument limit provided.', Response::HTTP_BAD_REQUEST);
         }
 
+        if (!filter_var($limit, FILTER_VALIDATE_INT)) {
+            throw new \InvalidArgumentException('Invalid argument limit provided.', Response::HTTP_BAD_REQUEST);
+        }
+
         return new TweetLimit($limit);
     }
 }
